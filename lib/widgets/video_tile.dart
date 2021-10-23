@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoTile extends StatefulWidget {
-  VideoTile(this.url);
+  const VideoTile(this.url);
 
   final String url;
 
@@ -15,22 +15,50 @@ class _VideoTileState extends State<VideoTile> {
   late final videoPlayerController = VideoPlayerController.network(widget.url);
   late ChewieController chewieController;
 
+  bool isPaused = false;
+
   @override
   void initState() {
     super.initState();
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
-      //aspectRatio: 3 / 6,
+      aspectRatio: 9 / 16,
       autoPlay: true,
       looping: true,
+      autoInitialize: true,
+      showControls: false,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      child: Chewie(controller: chewieController),
+        body: GestureDetector(
+      onTap: () {
+        if (isPaused) {
+          chewieController.videoPlayerController.play();
+          isPaused = false;
+          setState(() {});
+        } else {
+          chewieController.videoPlayerController.pause();
+          isPaused = true;
+          setState(() {});
+        }
+      },
+      child: Stack(children: [
+        Container(
+          child: Chewie(controller: chewieController),
+        ),
+        if (isPaused)
+          const Align(
+            alignment: Alignment.center,
+            child: Icon(
+              Icons.play_arrow,
+              size: 120.0,
+              color: Colors.white70,
+            ),
+          ),
+      ]),
     ));
   }
 
