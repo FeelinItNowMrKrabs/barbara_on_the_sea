@@ -1,10 +1,14 @@
-import 'package:barbara_on_the_sea/pages/home_page.dart';
+import 'package:barbara_on_the_sea/pages/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.bottom]);
   runApp(
-    BarbaraApp(),
+    ProviderScope(child: BarbaraApp()),
   );
 }
 
@@ -17,10 +21,9 @@ class BarbaraApp extends StatelessWidget {
       title: 'Barabara in the Sea',
       initialRoute: 'home',
       routes: {
-        'home': (BuildContext context) => HomePage(),
+        'home': (BuildContext context) => BottomNavBar(),
       },
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
     );

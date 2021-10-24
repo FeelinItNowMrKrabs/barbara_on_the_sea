@@ -1,6 +1,7 @@
 class Video {
   final int id;
   final String image;
+  final String price;
   final String name;
   final String regularVideo;
   final String regularVideoPoster;
@@ -19,6 +20,7 @@ class Video {
   Video({
     required this.id,
     required this.image,
+    required this.price,
     required this.name,
     required this.regularVideo,
     required this.regularVideoPoster,
@@ -40,6 +42,7 @@ class Video {
         id: _json['id'],
         image: _json['image'],
         name: _json['name'],
+        price: _json['price'],
         regularVideo: _json['regularVideo'],
         regularVideoPoster: _json['regularVideoPoster'],
         regularVideoMovie: _json['regularVideoMovie'],

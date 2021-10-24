@@ -27,53 +27,28 @@ class _HomePageState extends State<HomePage> {
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
-                  return Text('Loading....');
+                  return Center(child: CircularProgressIndicator());
                 default:
                   if (snapshot.hasError)
                     return Text('Error: ${snapshot.error}');
                   else {
-                    return PageView(
-                      controller: controller,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          color: Colors.blue,
-                          child: Center(
-                            child: VideoTile(
-                              video: snapshot.data![0],
-                              width: _deviceWidth,
-                              height: _deviceHeight,
+                    return PageView.builder(
+                        controller: controller,
+                        scrollDirection: Axis.vertical,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext _context, int _count) {
+                          return Container(
+                            width: _deviceWidth,
+                            height: _deviceHeight,
+                            child: Center(
+                              child: VideoTile(
+                                video: snapshot.data![_count],
+                                width: _deviceWidth,
+                                height: _deviceHeight,
+                              ),
                             ),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          color: Colors.red,
-                          child: Center(
-                            child: VideoTile(
-                              video: snapshot.data![1],
-                              width: _deviceWidth,
-                              height: _deviceHeight,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          color: Colors.yellow,
-                          child: Center(
-                            child: VideoTile(
-                              video: snapshot.data![2],
-                              width: _deviceWidth,
-                              height: _deviceHeight,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
+                          );
+                        });
                   }
               }
             }));
