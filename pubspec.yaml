@@ -33,17 +33,19 @@ dependencies:
   flutter:
     sdk: flutter
   tiktoklikescroller: ^0.1.8
-  riverpod: ^1.0.0-dev.6
+  
   get_it: ^7.2.0
   dio: ^4.0.0
   chewie: ^1.2.2
 
   video_player: ^2.2.5 
+  flutter_riverpod: ^1.0.0-dev.11
 
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
+
   
 
 # For information on the generic Dart part of this file, see the
